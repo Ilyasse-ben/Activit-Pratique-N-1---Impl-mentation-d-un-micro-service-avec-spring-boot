@@ -15,7 +15,7 @@ import java.util.UUID;
 public class BanckAccountRestController {
     @Autowired
     BankAccountRepository bankAccountRepository;
-    @GetMapping("/BankAccounts")
+    @GetMapping("/api")
     public List<BankAccount> bankAccounts(){
         return bankAccountRepository.findAll();
     }

@@ -1,7 +1,10 @@
 package net.ilyasse.activitepratiquen1.WebService;
 
+import net.ilyasse.activitepratiquen1.dto.AccountRequestdTO;
+import net.ilyasse.activitepratiquen1.dto.AccountResponseDto;
 import net.ilyasse.activitepratiquen1.entity.BankAccount;
 import net.ilyasse.activitepratiquen1.repository.BankAccountRepository;
+import net.ilyasse.activitepratiquen1.service.BankAccountServiceImp;
 import org.aspectj.lang.annotation.DeclareError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +18,8 @@ import java.util.UUID;
 public class BanckAccountRestController {
     @Autowired
     BankAccountRepository bankAccountRepository;
+    @Autowired
+    BankAccountServiceImp bankAccountServiceImp;
     @GetMapping("/api")
     public List<BankAccount> bankAccounts(){
         return bankAccountRepository.findAll();
@@ -33,10 +38,8 @@ public class BanckAccountRestController {
         return bankAccountRepository.save(account);
     }
     @PostMapping("/BankAccounts")
-    public BankAccount save(@RequestBody BankAccount bankAccount){
-        bankAccount.setId(UUID.randomUUID());
-        bankAccount.setCreatedAt(new Date());
-        return bankAccountRepository.save(bankAccount);
+    public AccountResponseDto save(@RequestBody AccountRequestdTO account){
+        return bankAccountServiceImp.addAccount(account);
     }
     @DeleteMapping("/BankAccounts/{id}")
     public void delete(@PathVariable UUID id){

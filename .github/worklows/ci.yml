@@ -1,0 +1,21 @@
+  name: sping boot ci
+
+  on:
+    push:
+      branches:
+        - main
+
+  jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: steup java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build application
+        run: ./mvnw clean package

@@ -23,7 +23,7 @@
           run: ./mvnw clean package
 
         - name: build docker image
-          run: docker build -t my-backend :latest.
+          run: docker build -t my-backend:latest .
 
         - name: logine to docker
           uses: docker/login-action@v3

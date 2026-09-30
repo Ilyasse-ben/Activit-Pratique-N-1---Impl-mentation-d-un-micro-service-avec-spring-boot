@@ -21,3 +21,6 @@
 
         - name: Build application
           run: ./mvnw clean package
+
+        - name: build docker image
+          run: docker build -t my-backend .
